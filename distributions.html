@@ -369,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="experiment-1-customer-wait-times">Experiment 1: Customer wait times</h2>
 <p>A support center logged how many minutes each of 240 customers waited before talking to someone.</p>
 <div class="raw-table">
-<div id="d722cbf5" class="cell" data-execution_count="2">
+<div id="ae4d1dbf" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>waits <span class="op">=</span> wait_times()</span>
@@ -1610,7 +1610,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="4f844b2f" class="cell" data-execution_count="3">
+<div id="b37f08a8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -1626,7 +1626,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="distributions_files/figure-html/cell-4-output-1.png" width="1045" height="661" class="figure-img"></p>
+<p><img src="distributions_files/figure-html/cell-4-output-1.png" width="1040" height="657" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1635,12 +1635,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data format for the histogram
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A histogram needs <strong>one numeric column</strong> with <strong>one row per observation</strong> (here, one row per customer, 240 rows). Leave the values raw: don’t bin or count them yourself, because <code>sns.histplot()</code> sorts the values into bins and counts how many land in each.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Type</th>
+<th>Role in the chart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>wait_minutes</code></td>
+<td>numeric (decimal minutes)</td>
+<td><code>x</code>: the values that get binned and counted</td>
+</tr>
+<tr class="even">
+<td><code>ticket_id</code></td>
+<td>integer ID</td>
+<td>not used; it just identifies each row</td>
+</tr>
+</tbody>
+</table>
+<p>Row order doesn’t matter, and any missing values in <code>wait_minutes</code> are simply left out.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="experiment-2-what-are-people-contacting-us-about" class="level2">
 <h2 class="anchored" data-anchor-id="experiment-2-what-are-people-contacting-us-about">Experiment 2: What are people contacting us about?</h2>
 <p>Here are 200 support tickets from September, sorted by date, the way a ticketing system exports them.</p>
 <div class="raw-table">
-<div id="306c0e4e" class="cell" data-execution_count="4">
+<div id="926bb037" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tickets <span class="op">=</span> ticket_categories()</span>
@@ -3072,7 +3115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Your guess:</strong> Roughly what share of tickets is about each category? Is one category dominating, or are they spread evenly?</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3081,9 +3124,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="027c39cf" class="cell" data-execution_count="5">
+<div id="8b9bd2cf" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> tickets[<span class="st">"category"</span>].value_counts()</span>
@@ -3099,7 +3142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="distributions_files/figure-html/cell-6-output-1.png" width="874" height="813" class="figure-img"></p>
+<p><img src="distributions_files/figure-html/cell-6-output-1.png" width="856" height="812" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -3109,7 +3152,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data format for the pie chart
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A pie chart needs <strong>one number per category</strong>: the size of each slice. The categories must be <strong>mutually exclusive</strong> (each ticket falls in exactly one) and together make up a <strong>meaningful whole</strong> (all tickets).</p>
+<p>The export arrives as <strong>one row per ticket</strong> (200 rows), so it has to be counted up first:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Type</th>
+<th>Role in the chart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>category</code></td>
+<td>text (categorical)</td>
+<td>defines the slices; every ticket has exactly one category</td>
+</tr>
+<tr class="even">
+<td><code>ticket_id</code>, <code>date</code>, <code>priority</code></td>
+<td>ID, date, text</td>
+<td>not used by this chart</td>
+</tr>
+</tbody>
+</table>
+<p><code>tickets["category"].value_counts()</code> turns that into <code>counts</code>, a pandas Series with <strong>one entry per category</strong> (5 entries), sorted largest to smallest:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index (label)</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>each category name, e.g.&nbsp;<code>Billing</code></td>
+<td>number of tickets in that category</td>
+</tr>
+</tbody>
+</table>
+<p><code>ax.pie()</code> then takes <code>counts.values</code> as the slice sizes and <code>counts.index</code> as the labels. Because the counts are sorted, <code>explode=[0.06] + [0] * ...</code> pulls out the first (largest) slice. If your spreadsheet already has a summary table, with one row per category and a count column, you can skip <code>value_counts()</code> and pass those two columns straight to <code>ax.pie()</code>. The sorted bar chart in the note below uses the same <code>counts</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3118,10 +3224,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Pie charts work when you have <strong>a few categories</strong> that <strong>add up to a meaningful whole</strong> and one or two slices matter most, like here. Humans judge angles poorly, so with many similar-sized slices, a sorted bar chart is usually easier to read:</p>
-<div id="c419d286" class="cell" data-fig-height="3.5" data-execution_count="6">
+<div id="137e24ea" class="cell" data-fig-height="3.5" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -3132,7 +3238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="distributions_files/figure-html/cell-7-output-1.png" width="1180" height="661" class="figure-img"></p>
+<p><img src="distributions_files/figure-html/cell-7-output-1.png" width="1165" height="657" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -3284,7 +3390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/TysonStanley\.github\.io\/see-the-pattern\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -3661,51 +3767,83 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">There are **two** typical waits: about 4 minutes and about 17 minutes. (In the simulation these are chat vs. phone customers.) Notice the mean, about 10 minutes, describes almost *nobody*. A single summary number hid the most important fact, and so did the table.</span><span class="co">]</span>{.reveal-note}</span>
 <span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Experiment 2: What are people contacting us about?</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>Here are 200 support tickets from September, sorted by date, the way a ticketing system exports them.</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data format for the histogram</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>A histogram needs **one numeric column** with **one row per observation** (here, one row per customer, 240 rows). Leave the values raw: don't bin or count them yourself, because <span class="in">`sns.histplot()`</span> sorts the values into bins and counts how many land in each.</span>
 <span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>::: {.raw-table}</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>tickets <span class="op">=</span> ticket_categories()</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>tickets</span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>::: {.guess}</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>**Your guess:** Roughly what share of tickets is about each category? Is one category dominating, or are they spread evenly?</span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reveal the pie chart</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> tickets[<span class="st">"category"</span>].value_counts()</span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> sns.color_palette(<span class="st">"Set2"</span>, <span class="bu">len</span>(counts))</span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">6.5</span>))</span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>ax.pie(counts.values, labels<span class="op">=</span>counts.index, colors<span class="op">=</span>colors, autopct<span class="op">=</span><span class="st">"%1.0f</span><span class="sc">%%</span><span class="st">"</span>,</span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>       startangle<span class="op">=</span><span class="dv">90</span>, counterclock<span class="op">=</span><span class="va">False</span>, explode<span class="op">=</span>[<span class="fl">0.06</span>] <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> (<span class="bu">len</span>(counts) <span class="op">-</span> <span class="dv">1</span>),</span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>       wedgeprops<span class="op">=</span>{<span class="st">"edgecolor"</span>: <span class="st">"white"</span>, <span class="st">"linewidth"</span>: <span class="dv">2</span>}, textprops<span class="op">=</span>{<span class="st">"fontsize"</span>: <span class="dv">11</span>})</span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Nearly half of all tickets are about billing"</span>)</span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Billing alone is close to half of all tickets. In the table, "Billing" just looks like one word that comes up "a lot."</span><span class="co">]</span>{.reveal-note}</span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## A note on pie charts</span></span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>Pie charts work when you have **a few categories** that **add up to a meaningful whole** and one or two slices matter most, like here. Humans judge angles poorly, so with many similar-sized slices, a sorted bar chart is usually easier to read:</span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3.5</span></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>counts.values <span class="op">/</span> counts.<span class="bu">sum</span>() <span class="op">*</span> <span class="dv">100</span>, y<span class="op">=</span>counts.index, color<span class="op">=</span><span class="st">"#2a6f97"</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Percent of tickets"</span>, ylabel<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Same data as a sorted bar chart"</span>)</span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Role in the chart <span class="pp">|</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`wait_minutes`</span> <span class="pp">|</span> numeric (decimal minutes) <span class="pp">|</span> <span class="in">`x`</span>: the values that get binned and counted <span class="pp">|</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`ticket_id`</span> <span class="pp">|</span> integer ID <span class="pp">|</span> not used; it just identifies each row <span class="pp">|</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>Row order doesn't matter, and any missing values in <span class="in">`wait_minutes`</span> are simply left out.</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Experiment 2: What are people contacting us about?</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>Here are 200 support tickets from September, sorted by date, the way a ticketing system exports them.</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>::: {.raw-table}</span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>tickets <span class="op">=</span> ticket_categories()</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>tickets</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>::: {.guess}</span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>**Your guess:** Roughly what share of tickets is about each category? Is one category dominating, or are they spread evenly?</span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reveal the pie chart</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> tickets[<span class="st">"category"</span>].value_counts()</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> sns.color_palette(<span class="st">"Set2"</span>, <span class="bu">len</span>(counts))</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">6.5</span>))</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>ax.pie(counts.values, labels<span class="op">=</span>counts.index, colors<span class="op">=</span>colors, autopct<span class="op">=</span><span class="st">"%1.0f</span><span class="sc">%%</span><span class="st">"</span>,</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>       startangle<span class="op">=</span><span class="dv">90</span>, counterclock<span class="op">=</span><span class="va">False</span>, explode<span class="op">=</span>[<span class="fl">0.06</span>] <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> (<span class="bu">len</span>(counts) <span class="op">-</span> <span class="dv">1</span>),</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>       wedgeprops<span class="op">=</span>{<span class="st">"edgecolor"</span>: <span class="st">"white"</span>, <span class="st">"linewidth"</span>: <span class="dv">2</span>}, textprops<span class="op">=</span>{<span class="st">"fontsize"</span>: <span class="dv">11</span>})</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Nearly half of all tickets are about billing"</span>)</span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Billing alone is close to half of all tickets. In the table, "Billing" just looks like one word that comes up "a lot."</span><span class="co">]</span>{.reveal-note}</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data format for the pie chart</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>A pie chart needs **one number per category**: the size of each slice. The categories must be **mutually exclusive** (each ticket falls in exactly one) and together make up a **meaningful whole** (all tickets).</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>The export arrives as **one row per ticket** (200 rows), so it has to be counted up first:</span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Role in the chart <span class="pp">|</span></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`category`</span> <span class="pp">|</span> text (categorical) <span class="pp">|</span> defines the slices; every ticket has exactly one category <span class="pp">|</span></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`ticket_id`</span>, <span class="in">`date`</span>, <span class="in">`priority`</span> <span class="pp">|</span> ID, date, text <span class="pp">|</span> not used by this chart <span class="pp">|</span></span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="in">`tickets["category"].value_counts()`</span> turns that into <span class="in">`counts`</span>, a pandas Series with **one entry per category** (5 entries), sorted largest to smallest:</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Index (label) <span class="pp">|</span> Value <span class="pp">|</span></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> each category name, e.g. <span class="in">`Billing`</span> <span class="pp">|</span> number of tickets in that category <span class="pp">|</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="in">`ax.pie()`</span> then takes <span class="in">`counts.values`</span> as the slice sizes and <span class="in">`counts.index`</span> as the labels. Because the counts are sorted, <span class="in">`explode=[0.06] + [0] * ...`</span> pulls out the first (largest) slice. If your spreadsheet already has a summary table, with one row per category and a count column, you can skip <span class="in">`value_counts()`</span> and pass those two columns straight to <span class="in">`ax.pie()`</span>. The sorted bar chart in the note below uses the same <span class="in">`counts`</span>.</span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## A note on pie charts</span></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>Pie charts work when you have **a few categories** that **add up to a meaningful whole** and one or two slices matter most, like here. Humans judge angles poorly, so with many similar-sized slices, a sorted bar chart is usually easier to read:</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3.5</span></span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>counts.values <span class="op">/</span> counts.<span class="bu">sum</span>() <span class="op">*</span> <span class="dv">100</span>, y<span class="op">=</span>counts.index, color<span class="op">=</span><span class="st">"#2a6f97"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Percent of tickets"</span>, ylabel<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Same data as a sorted bar chart"</span>)</span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

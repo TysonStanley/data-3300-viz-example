@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="experiment-how-is-web-traffic-changing">Experiment: How is web traffic changing?</h2>
 <p>An online store tracks monthly visits to three product sections. Here are three years of data in the “wide” format most spreadsheets use, with one column per product line.</p>
 <div class="raw-table">
-<div id="34d0041d" class="cell" data-execution_count="2">
+<div id="55ec1a6f" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>visits_long, visits_wide <span class="op">=</span> monthly_visits()</span>
@@ -663,7 +663,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="c26faafb" class="cell" data-fig-height="5" data-execution_count="3">
+<div id="68ea2c21" class="cell" data-fig-height="5" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>palette <span class="op">=</span> {<span class="st">"Outdoor gear"</span>: <span class="st">"#00798c"</span>, <span class="st">"Smart home"</span>: <span class="st">"#edae49"</span>, <span class="st">"Office supplies"</span>: <span class="st">"#d1495b"</span>}</span>
@@ -687,7 +687,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="time_files/figure-html/cell-4-output-1.png" width="1321" height="716" class="figure-img"></p>
+<p><img src="time_files/figure-html/cell-4-output-1.png" width="1322" height="717" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -708,14 +708,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Wide vs.&nbsp;long data
+<span class="screen-reader-only">Note</span>Data format for the grouped line plot
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>The table above is <strong>wide</strong> (one column per product line), but <code>sns.lineplot()</code> with <code>hue=</code> needs <strong>long</strong> data: <strong>one row per product line per month</strong>. Three years of monthly data for three product lines is 36 × 3 = 108 rows in <code>visits_long</code>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Type</th>
+<th>Role in the chart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>month</code></td>
+<td>date (<code>datetime64</code>, first day of each month)</td>
+<td><code>x</code>: the time axis</td>
+</tr>
+<tr class="even">
+<td><code>product_line</code></td>
+<td>text: Outdoor gear, Smart home, Office supplies</td>
+<td><code>hue</code>: one line per unique value</td>
+</tr>
+<tr class="odd">
+<td><code>visits</code></td>
+<td>integer</td>
+<td><code>y</code></td>
+</tr>
+</tbody>
+</table>
+<p>Two details matter:</p>
+<ul>
+<li><strong><code>month</code> must be real dates, not text.</strong> In the wide table it’s stored as text like <code>"2025-01"</code>. The “Site redesign” marker (<code>pd.Timestamp("2025-01-01")</code>) and the date-axis labels (<code>mdates</code>) only work on a true date column. Starting from text, convert with <code>pd.to_datetime()</code>.</li>
+<li><strong>One row per group per time point.</strong> If a product line had several rows for the same month, <code>lineplot()</code> would average them and draw a shaded uncertainty band instead of a single clean line.</li>
+</ul>
+<p>The keys of the <code>palette</code> dictionary must match the <code>product_line</code> values exactly. See the note below for converting wide data to long.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Wide vs.&nbsp;long data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Spreadsheets usually store time series <strong>wide</strong> (one column per group). <code>seaborn</code> wants data <strong>long</strong> (one row per observation, with a column naming the group), which makes <code>hue=</code> work. Converting is one line with <code>pandas</code>:</p>
-<div id="770db0e9" class="cell" data-execution_count="4">
+<div id="1f3231fe" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> <span class="op">=</span> visits_wide.melt(id_vars<span class="op">=</span><span class="st">"month"</span>, var_name<span class="op">=</span><span class="st">"product_line"</span>, value_name<span class="op">=</span><span class="st">"visits"</span>)</span>
@@ -936,7 +989,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/TysonStanley\.github\.io\/see-the-pattern\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1329,15 +1382,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## Wide vs. long data</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>Spreadsheets usually store time series **wide** (one column per group). `seaborn` wants data **long** (one row per observation, with a column naming the group), which makes <span class="in">`hue=`</span> work. Converting is one line with <span class="in">`pandas`</span>:</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data format for the grouped line plot</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>The table above is **wide** (one column per product line), but `sns.lineplot()` with `hue=` needs **long** data: **one row per product line per month**. Three years of monthly data for three product lines is 36 × 3 = 108 rows in <span class="in">`visits_long`</span>.</span>
 <span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> <span class="op">=</span> visits_wide.melt(id_vars<span class="op">=</span><span class="st">"month"</span>, var_name<span class="op">=</span><span class="st">"product_line"</span>, value_name<span class="op">=</span><span class="st">"visits"</span>)</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span>.head(<span class="dv">8</span>)</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Role in the chart <span class="pp">|</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`month`</span> <span class="pp">|</span> date (<span class="in">`datetime64`</span>, first day of each month) <span class="pp">|</span> <span class="in">`x`</span>: the time axis <span class="pp">|</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`product_line`</span> <span class="pp">|</span> text: Outdoor gear, Smart home, Office supplies <span class="pp">|</span> <span class="in">`hue`</span>: one line per unique value <span class="pp">|</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`visits`</span> <span class="pp">|</span> integer <span class="pp">|</span> <span class="in">`y`</span> <span class="pp">|</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>Two details matter:</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**`month` must be real dates, not text.** In the wide table it's stored as text like <span class="in">`"2025-01"`</span>. The "Site redesign" marker (<span class="in">`pd.Timestamp("2025-01-01")`</span>) and the date-axis labels (<span class="in">`mdates`</span>) only work on a true date column. Starting from text, convert with <span class="in">`pd.to_datetime()`</span>.</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**One row per group per time point.** If a product line had several rows for the same month, <span class="in">`lineplot()`</span> would average them and draw a shaded uncertainty band instead of a single clean line.</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>The keys of the <span class="in">`palette`</span> dictionary must match the <span class="in">`product_line`</span> values exactly. See the note below for converting wide data to long.</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## Wide vs. long data</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>Spreadsheets usually store time series **wide** (one column per group). `seaborn` wants data **long** (one row per observation, with a column naming the group), which makes <span class="in">`hue=`</span> work. Converting is one line with <span class="in">`pandas`</span>:</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> <span class="op">=</span> visits_wide.melt(id_vars<span class="op">=</span><span class="st">"month"</span>, var_name<span class="op">=</span><span class="st">"product_line"</span>, value_name<span class="op">=</span><span class="st">"visits"</span>)</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span>.head(<span class="dv">8</span>)</span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
