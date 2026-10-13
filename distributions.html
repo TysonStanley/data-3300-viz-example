@@ -1,0 +1,3729 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Histograms &amp; Pie Charts – DATA3300 Data Visuals</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-df07115ad9f15e2ef3479c789e6873c8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">DATA3300 Data Visuals</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Start here</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./distributions.html" aria-current="page"> 
+<span class="menu-text">Histograms &amp; Pie Charts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./groups.html"> 
+<span class="menu-text">Bar Charts &amp; Boxplots</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./relationships.html"> 
+<span class="menu-text">Scatterplots</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./time.html"> 
+<span class="menu-text">Lines Over Time</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#experiment-1-customer-wait-times" id="toc-experiment-1-customer-wait-times" class="nav-link active" data-scroll-target="#experiment-1-customer-wait-times">Experiment 1: Customer wait times</a></li>
+  <li><a href="#experiment-2-what-are-people-contacting-us-about" id="toc-experiment-2-what-are-people-contacting-us-about" class="nav-link" data-scroll-target="#experiment-2-what-are-people-contacting-us-about">Experiment 2: What are people contacting us about?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Histograms &amp; Pie Charts</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">The shape of one variable, and parts of a whole</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="experiment-1-customer-wait-times" class="level2">
+<h2 class="anchored" data-anchor-id="experiment-1-customer-wait-times">Experiment 1: Customer wait times</h2>
+<p>A support center logged how many minutes each of 240 customers waited before talking to someone.</p>
+<div class="raw-table">
+<div id="d722cbf5" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the Python code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>waits <span class="op">=</span> wait_times()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>waits</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ticket_id</th>
+<th data-quarto-table-cell-role="th">wait_minutes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>10075</td>
+<td>2.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>10084</td>
+<td>14.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>10049</td>
+<td>19.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>10142</td>
+<td>2.9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>10029</td>
+<td>17.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>10006</td>
+<td>3.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>10214</td>
+<td>5.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>10018</td>
+<td>3.9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>10025</td>
+<td>2.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>10072</td>
+<td>17.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>10102</td>
+<td>2.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>10007</td>
+<td>2.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>10203</td>
+<td>6.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>10224</td>
+<td>17.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>10073</td>
+<td>4.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>10103</td>
+<td>20.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>10041</td>
+<td>5.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>10030</td>
+<td>15.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>10129</td>
+<td>3.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>10032</td>
+<td>4.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20</th>
+<td>10046</td>
+<td>5.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21</th>
+<td>10216</td>
+<td>13.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">22</th>
+<td>10002</td>
+<td>4.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23</th>
+<td>10234</td>
+<td>16.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">24</th>
+<td>10122</td>
+<td>4.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">25</th>
+<td>10017</td>
+<td>21.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">26</th>
+<td>10190</td>
+<td>4.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">27</th>
+<td>10063</td>
+<td>16.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">28</th>
+<td>10155</td>
+<td>6.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">29</th>
+<td>10238</td>
+<td>18.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">30</th>
+<td>10064</td>
+<td>8.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">31</th>
+<td>10159</td>
+<td>19.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">32</th>
+<td>10096</td>
+<td>16.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">33</th>
+<td>10038</td>
+<td>19.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">34</th>
+<td>10195</td>
+<td>19.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">35</th>
+<td>10099</td>
+<td>5.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">36</th>
+<td>10219</td>
+<td>3.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">37</th>
+<td>10093</td>
+<td>22.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">38</th>
+<td>10074</td>
+<td>2.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">39</th>
+<td>10100</td>
+<td>17.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">40</th>
+<td>10065</td>
+<td>12.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">41</th>
+<td>10050</td>
+<td>5.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">42</th>
+<td>10240</td>
+<td>2.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">43</th>
+<td>10132</td>
+<td>5.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">44</th>
+<td>10027</td>
+<td>13.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">45</th>
+<td>10026</td>
+<td>12.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">46</th>
+<td>10199</td>
+<td>7.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">47</th>
+<td>10182</td>
+<td>16.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">48</th>
+<td>10090</td>
+<td>2.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">49</th>
+<td>10052</td>
+<td>2.9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">50</th>
+<td>10140</td>
+<td>21.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">51</th>
+<td>10163</td>
+<td>3.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">52</th>
+<td>10123</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">53</th>
+<td>10066</td>
+<td>4.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">54</th>
+<td>10237</td>
+<td>2.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">55</th>
+<td>10167</td>
+<td>14.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">56</th>
+<td>10130</td>
+<td>14.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">57</th>
+<td>10221</td>
+<td>5.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">58</th>
+<td>10128</td>
+<td>15.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">59</th>
+<td>10148</td>
+<td>18.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">60</th>
+<td>10062</td>
+<td>3.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">61</th>
+<td>10225</td>
+<td>24.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">62</th>
+<td>10138</td>
+<td>15.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">63</th>
+<td>10055</td>
+<td>16.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">64</th>
+<td>10131</td>
+<td>15.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">65</th>
+<td>10174</td>
+<td>14.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">66</th>
+<td>10141</td>
+<td>3.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">67</th>
+<td>10023</td>
+<td>22.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">68</th>
+<td>10169</td>
+<td>19.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">69</th>
+<td>10235</td>
+<td>5.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">70</th>
+<td>10210</td>
+<td>11.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">71</th>
+<td>10192</td>
+<td>4.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">72</th>
+<td>10044</td>
+<td>19.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">73</th>
+<td>10149</td>
+<td>7.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">74</th>
+<td>10001</td>
+<td>3.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">75</th>
+<td>10201</td>
+<td>21.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">76</th>
+<td>10143</td>
+<td>17.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">77</th>
+<td>10095</td>
+<td>17.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">78</th>
+<td>10229</td>
+<td>6.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">79</th>
+<td>10117</td>
+<td>18.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">80</th>
+<td>10173</td>
+<td>3.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">81</th>
+<td>10091</td>
+<td>18.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">82</th>
+<td>10108</td>
+<td>17.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">83</th>
+<td>10109</td>
+<td>1.9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">84</th>
+<td>10157</td>
+<td>17.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">85</th>
+<td>10071</td>
+<td>2.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">86</th>
+<td>10110</td>
+<td>2.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">87</th>
+<td>10015</td>
+<td>3.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">88</th>
+<td>10114</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">89</th>
+<td>10021</td>
+<td>18.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">90</th>
+<td>10031</td>
+<td>15.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">91</th>
+<td>10228</td>
+<td>4.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">92</th>
+<td>10162</td>
+<td>15.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">93</th>
+<td>10061</td>
+<td>21.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">94</th>
+<td>10211</td>
+<td>3.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">95</th>
+<td>10183</td>
+<td>1.9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">96</th>
+<td>10154</td>
+<td>8.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">97</th>
+<td>10226</td>
+<td>5.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">98</th>
+<td>10024</td>
+<td>14.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">99</th>
+<td>10081</td>
+<td>4.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">100</th>
+<td>10124</td>
+<td>3.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">101</th>
+<td>10077</td>
+<td>1.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">102</th>
+<td>10218</td>
+<td>16.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">103</th>
+<td>10043</td>
+<td>15.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">104</th>
+<td>10045</td>
+<td>17.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">105</th>
+<td>10121</td>
+<td>15.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">106</th>
+<td>10171</td>
+<td>4.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">107</th>
+<td>10082</td>
+<td>6.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">108</th>
+<td>10205</td>
+<td>3.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">109</th>
+<td>10217</td>
+<td>4.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">110</th>
+<td>10166</td>
+<td>3.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">111</th>
+<td>10145</td>
+<td>17.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">112</th>
+<td>10111</td>
+<td>4.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">113</th>
+<td>10118</td>
+<td>15.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">114</th>
+<td>10147</td>
+<td>14.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">115</th>
+<td>10085</td>
+<td>3.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">116</th>
+<td>10051</td>
+<td>17.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">117</th>
+<td>10094</td>
+<td>17.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">118</th>
+<td>10187</td>
+<td>1.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">119</th>
+<td>10230</td>
+<td>3.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">120</th>
+<td>10209</td>
+<td>3.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">121</th>
+<td>10105</td>
+<td>15.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">122</th>
+<td>10039</td>
+<td>14.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">123</th>
+<td>10037</td>
+<td>2.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">124</th>
+<td>10078</td>
+<td>19.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">125</th>
+<td>10019</td>
+<td>5.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">126</th>
+<td>10168</td>
+<td>20.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">127</th>
+<td>10156</td>
+<td>3.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">128</th>
+<td>10076</td>
+<td>1.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">129</th>
+<td>10020</td>
+<td>3.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">130</th>
+<td>10106</td>
+<td>16.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">131</th>
+<td>10151</td>
+<td>15.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">132</th>
+<td>10165</td>
+<td>9.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">133</th>
+<td>10152</td>
+<td>2.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">134</th>
+<td>10092</td>
+<td>3.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">135</th>
+<td>10079</td>
+<td>14.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">136</th>
+<td>10158</td>
+<td>8.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">137</th>
+<td>10058</td>
+<td>18.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">138</th>
+<td>10178</td>
+<td>19.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">139</th>
+<td>10060</td>
+<td>16.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">140</th>
+<td>10003</td>
+<td>4.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">141</th>
+<td>10028</td>
+<td>15.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">142</th>
+<td>10144</td>
+<td>3.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">143</th>
+<td>10207</td>
+<td>11.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">144</th>
+<td>10189</td>
+<td>2.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">145</th>
+<td>10215</td>
+<td>3.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">146</th>
+<td>10126</td>
+<td>2.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">147</th>
+<td>10202</td>
+<td>17.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">148</th>
+<td>10036</td>
+<td>2.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">149</th>
+<td>10137</td>
+<td>4.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">150</th>
+<td>10088</td>
+<td>3.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">151</th>
+<td>10067</td>
+<td>4.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">152</th>
+<td>10034</td>
+<td>17.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">153</th>
+<td>10070</td>
+<td>17.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">154</th>
+<td>10170</td>
+<td>2.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">155</th>
+<td>10161</td>
+<td>6.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">156</th>
+<td>10042</td>
+<td>5.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">157</th>
+<td>10164</td>
+<td>3.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">158</th>
+<td>10193</td>
+<td>2.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">159</th>
+<td>10086</td>
+<td>18.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">160</th>
+<td>10047</td>
+<td>4.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">161</th>
+<td>10146</td>
+<td>23.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">162</th>
+<td>10191</td>
+<td>3.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">163</th>
+<td>10014</td>
+<td>18.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">164</th>
+<td>10097</td>
+<td>3.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">165</th>
+<td>10035</td>
+<td>11.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">166</th>
+<td>10011</td>
+<td>6.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">167</th>
+<td>10016</td>
+<td>7.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">168</th>
+<td>10181</td>
+<td>17.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">169</th>
+<td>10022</td>
+<td>19.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">170</th>
+<td>10153</td>
+<td>18.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">171</th>
+<td>10012</td>
+<td>5.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">172</th>
+<td>10139</td>
+<td>4.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">173</th>
+<td>10220</td>
+<td>17.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">174</th>
+<td>10172</td>
+<td>16.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">175</th>
+<td>10013</td>
+<td>16.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">176</th>
+<td>10180</td>
+<td>2.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">177</th>
+<td>10116</td>
+<td>17.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">178</th>
+<td>10125</td>
+<td>15.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">179</th>
+<td>10212</td>
+<td>18.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">180</th>
+<td>10119</td>
+<td>7.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">181</th>
+<td>10227</td>
+<td>2.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">182</th>
+<td>10206</td>
+<td>2.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">183</th>
+<td>10194</td>
+<td>1.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">184</th>
+<td>10134</td>
+<td>4.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">185</th>
+<td>10213</td>
+<td>5.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">186</th>
+<td>10101</td>
+<td>2.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">187</th>
+<td>10239</td>
+<td>9.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">188</th>
+<td>10069</td>
+<td>2.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">189</th>
+<td>10053</td>
+<td>17.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">190</th>
+<td>10232</td>
+<td>4.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">191</th>
+<td>10120</td>
+<td>13.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">192</th>
+<td>10056</td>
+<td>4.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">193</th>
+<td>10200</td>
+<td>2.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">194</th>
+<td>10133</td>
+<td>16.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">195</th>
+<td>10136</td>
+<td>12.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">196</th>
+<td>10057</td>
+<td>15.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">197</th>
+<td>10083</td>
+<td>4.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">198</th>
+<td>10008</td>
+<td>3.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">199</th>
+<td>10127</td>
+<td>14.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">200</th>
+<td>10184</td>
+<td>3.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">201</th>
+<td>10186</td>
+<td>19.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">202</th>
+<td>10223</td>
+<td>8.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">203</th>
+<td>10087</td>
+<td>6.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">204</th>
+<td>10236</td>
+<td>4.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">205</th>
+<td>10198</td>
+<td>18.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">206</th>
+<td>10222</td>
+<td>17.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">207</th>
+<td>10010</td>
+<td>5.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">208</th>
+<td>10115</td>
+<td>14.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">209</th>
+<td>10104</td>
+<td>16.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">210</th>
+<td>10233</td>
+<td>5.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">211</th>
+<td>10196</td>
+<td>7.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">212</th>
+<td>10005</td>
+<td>4.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">213</th>
+<td>10179</td>
+<td>2.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">214</th>
+<td>10185</td>
+<td>9.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">215</th>
+<td>10107</td>
+<td>3.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">216</th>
+<td>10231</td>
+<td>1.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">217</th>
+<td>10204</td>
+<td>19.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">218</th>
+<td>10033</td>
+<td>16.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">219</th>
+<td>10150</td>
+<td>5.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">220</th>
+<td>10098</td>
+<td>13.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">221</th>
+<td>10177</td>
+<td>3.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">222</th>
+<td>10176</td>
+<td>4.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">223</th>
+<td>10197</td>
+<td>5.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">224</th>
+<td>10009</td>
+<td>21.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">225</th>
+<td>10175</td>
+<td>16.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">226</th>
+<td>10068</td>
+<td>3.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">227</th>
+<td>10113</td>
+<td>5.9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">228</th>
+<td>10054</td>
+<td>15.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">229</th>
+<td>10059</td>
+<td>16.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">230</th>
+<td>10188</td>
+<td>21.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">231</th>
+<td>10112</td>
+<td>20.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">232</th>
+<td>10040</td>
+<td>3.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">233</th>
+<td>10208</td>
+<td>3.9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">234</th>
+<td>10089</td>
+<td>14.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">235</th>
+<td>10048</td>
+<td>4.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">236</th>
+<td>10080</td>
+<td>15.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">237</th>
+<td>10004</td>
+<td>2.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">238</th>
+<td>10160</td>
+<td>19.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">239</th>
+<td>10135</td>
+<td>1.6</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div class="guess">
+<p><strong>Your guess:</strong> What does a “typical” wait look like? Is there one typical wait time, or more than one? Scroll through the table and decide before opening the chart.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reveal the histogram
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="4f844b2f" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the Python code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>waits, x<span class="op">=</span><span class="st">"wait_minutes"</span>, binwidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">"#2a6f97"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ax.axvline(waits[<span class="st">"wait_minutes"</span>].mean(), color<span class="op">=</span><span class="st">"#d1495b"</span>, ls<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="ss">f"mean = </span><span class="sc">{</span>waits[<span class="st">'wait_minutes'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> min"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            xy<span class="op">=</span>(waits[<span class="st">"wait_minutes"</span>].mean(), ax.get_ylim()[<span class="dv">1</span>] <span class="op">*</span> <span class="fl">0.9</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">0</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, color<span class="op">=</span><span class="st">"#d1495b"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Wait time (minutes)"</span>, ylabel<span class="op">=</span><span class="st">"Number of customers"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Two humps: there are two kinds of customers"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/cell-4-output-1.png" width="1045" height="661" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="reveal-note">There are <strong>two</strong> typical waits: about 4 minutes and about 17 minutes. (In the simulation these are chat vs.&nbsp;phone customers.) Notice the mean, about 10 minutes, describes almost <em>nobody</em>. A single summary number hid the most important fact, and so did the table.</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="experiment-2-what-are-people-contacting-us-about" class="level2">
+<h2 class="anchored" data-anchor-id="experiment-2-what-are-people-contacting-us-about">Experiment 2: What are people contacting us about?</h2>
+<p>Here are 200 support tickets from September, sorted by date, the way a ticketing system exports them.</p>
+<div class="raw-table">
+<div id="306c0e4e" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the Python code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tickets <span class="op">=</span> ticket_categories()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tickets</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ticket_id</th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">priority</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>20200</td>
+<td>2026-09-01</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>20002</td>
+<td>2026-09-01</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>20144</td>
+<td>2026-09-01</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>20166</td>
+<td>2026-09-01</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>20101</td>
+<td>2026-09-01</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>20028</td>
+<td>2026-09-01</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>20183</td>
+<td>2026-09-01</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>20022</td>
+<td>2026-09-01</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>20075</td>
+<td>2026-09-02</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>20072</td>
+<td>2026-09-02</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>20163</td>
+<td>2026-09-02</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>20199</td>
+<td>2026-09-02</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>20044</td>
+<td>2026-09-02</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>20006</td>
+<td>2026-09-03</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>20047</td>
+<td>2026-09-03</td>
+<td>Other</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>20082</td>
+<td>2026-09-03</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>20020</td>
+<td>2026-09-03</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>20079</td>
+<td>2026-09-04</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>20128</td>
+<td>2026-09-04</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>20046</td>
+<td>2026-09-04</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20</th>
+<td>20093</td>
+<td>2026-09-04</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21</th>
+<td>20019</td>
+<td>2026-09-04</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">22</th>
+<td>20063</td>
+<td>2026-09-04</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23</th>
+<td>20187</td>
+<td>2026-09-04</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">24</th>
+<td>20015</td>
+<td>2026-09-04</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">25</th>
+<td>20122</td>
+<td>2026-09-05</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">26</th>
+<td>20127</td>
+<td>2026-09-05</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">27</th>
+<td>20054</td>
+<td>2026-09-05</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">28</th>
+<td>20068</td>
+<td>2026-09-05</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">29</th>
+<td>20131</td>
+<td>2026-09-05</td>
+<td>Other</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">30</th>
+<td>20174</td>
+<td>2026-09-05</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">31</th>
+<td>20003</td>
+<td>2026-09-05</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">32</th>
+<td>20120</td>
+<td>2026-09-05</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">33</th>
+<td>20191</td>
+<td>2026-09-06</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">34</th>
+<td>20036</td>
+<td>2026-09-06</td>
+<td>Other</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">35</th>
+<td>20064</td>
+<td>2026-09-06</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">36</th>
+<td>20091</td>
+<td>2026-09-06</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">37</th>
+<td>20175</td>
+<td>2026-09-06</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">38</th>
+<td>20080</td>
+<td>2026-09-06</td>
+<td>Shipping</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">39</th>
+<td>20161</td>
+<td>2026-09-07</td>
+<td>Other</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">40</th>
+<td>20065</td>
+<td>2026-09-07</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">41</th>
+<td>20146</td>
+<td>2026-09-07</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">42</th>
+<td>20086</td>
+<td>2026-09-07</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">43</th>
+<td>20037</td>
+<td>2026-09-07</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">44</th>
+<td>20112</td>
+<td>2026-09-07</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">45</th>
+<td>20073</td>
+<td>2026-09-07</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">46</th>
+<td>20143</td>
+<td>2026-09-07</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">47</th>
+<td>20060</td>
+<td>2026-09-07</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">48</th>
+<td>20145</td>
+<td>2026-09-08</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">49</th>
+<td>20099</td>
+<td>2026-09-08</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">50</th>
+<td>20059</td>
+<td>2026-09-08</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">51</th>
+<td>20160</td>
+<td>2026-09-08</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">52</th>
+<td>20109</td>
+<td>2026-09-08</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">53</th>
+<td>20186</td>
+<td>2026-09-08</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">54</th>
+<td>20089</td>
+<td>2026-09-08</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">55</th>
+<td>20193</td>
+<td>2026-09-08</td>
+<td>Other</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">56</th>
+<td>20123</td>
+<td>2026-09-08</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">57</th>
+<td>20005</td>
+<td>2026-09-09</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">58</th>
+<td>20141</td>
+<td>2026-09-09</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">59</th>
+<td>20069</td>
+<td>2026-09-09</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">60</th>
+<td>20014</td>
+<td>2026-09-09</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">61</th>
+<td>20108</td>
+<td>2026-09-09</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">62</th>
+<td>20129</td>
+<td>2026-09-09</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">63</th>
+<td>20170</td>
+<td>2026-09-09</td>
+<td>Shipping</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">64</th>
+<td>20084</td>
+<td>2026-09-10</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">65</th>
+<td>20067</td>
+<td>2026-09-10</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">66</th>
+<td>20049</td>
+<td>2026-09-10</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">67</th>
+<td>20142</td>
+<td>2026-09-10</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">68</th>
+<td>20151</td>
+<td>2026-09-10</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">69</th>
+<td>20090</td>
+<td>2026-09-11</td>
+<td>Product defect</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">70</th>
+<td>20195</td>
+<td>2026-09-11</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">71</th>
+<td>20178</td>
+<td>2026-09-11</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">72</th>
+<td>20077</td>
+<td>2026-09-11</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">73</th>
+<td>20074</td>
+<td>2026-09-11</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">74</th>
+<td>20169</td>
+<td>2026-09-11</td>
+<td>Other</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">75</th>
+<td>20098</td>
+<td>2026-09-11</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">76</th>
+<td>20052</td>
+<td>2026-09-11</td>
+<td>Other</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">77</th>
+<td>20117</td>
+<td>2026-09-11</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">78</th>
+<td>20033</td>
+<td>2026-09-12</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">79</th>
+<td>20158</td>
+<td>2026-09-12</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">80</th>
+<td>20024</td>
+<td>2026-09-12</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">81</th>
+<td>20083</td>
+<td>2026-09-12</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">82</th>
+<td>20004</td>
+<td>2026-09-12</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">83</th>
+<td>20173</td>
+<td>2026-09-13</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">84</th>
+<td>20105</td>
+<td>2026-09-13</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">85</th>
+<td>20134</td>
+<td>2026-09-13</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">86</th>
+<td>20137</td>
+<td>2026-09-14</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">87</th>
+<td>20115</td>
+<td>2026-09-14</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">88</th>
+<td>20010</td>
+<td>2026-09-14</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">89</th>
+<td>20150</td>
+<td>2026-09-15</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">90</th>
+<td>20007</td>
+<td>2026-09-15</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">91</th>
+<td>20008</td>
+<td>2026-09-15</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">92</th>
+<td>20104</td>
+<td>2026-09-15</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">93</th>
+<td>20176</td>
+<td>2026-09-16</td>
+<td>Other</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">94</th>
+<td>20149</td>
+<td>2026-09-16</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">95</th>
+<td>20155</td>
+<td>2026-09-16</td>
+<td>Product defect</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">96</th>
+<td>20159</td>
+<td>2026-09-16</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">97</th>
+<td>20095</td>
+<td>2026-09-16</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">98</th>
+<td>20165</td>
+<td>2026-09-16</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">99</th>
+<td>20017</td>
+<td>2026-09-16</td>
+<td>Shipping</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">100</th>
+<td>20138</td>
+<td>2026-09-16</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">101</th>
+<td>20018</td>
+<td>2026-09-17</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">102</th>
+<td>20081</td>
+<td>2026-09-17</td>
+<td>Other</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">103</th>
+<td>20180</td>
+<td>2026-09-17</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">104</th>
+<td>20035</td>
+<td>2026-09-17</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">105</th>
+<td>20023</td>
+<td>2026-09-17</td>
+<td>Other</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">106</th>
+<td>20106</td>
+<td>2026-09-18</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">107</th>
+<td>20038</td>
+<td>2026-09-18</td>
+<td>Shipping</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">108</th>
+<td>20188</td>
+<td>2026-09-18</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">109</th>
+<td>20168</td>
+<td>2026-09-18</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">110</th>
+<td>20196</td>
+<td>2026-09-18</td>
+<td>Other</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">111</th>
+<td>20043</td>
+<td>2026-09-18</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">112</th>
+<td>20132</td>
+<td>2026-09-18</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">113</th>
+<td>20154</td>
+<td>2026-09-18</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">114</th>
+<td>20001</td>
+<td>2026-09-19</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">115</th>
+<td>20016</td>
+<td>2026-09-19</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">116</th>
+<td>20078</td>
+<td>2026-09-19</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">117</th>
+<td>20179</td>
+<td>2026-09-20</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">118</th>
+<td>20076</td>
+<td>2026-09-20</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">119</th>
+<td>20056</td>
+<td>2026-09-20</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">120</th>
+<td>20164</td>
+<td>2026-09-20</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">121</th>
+<td>20125</td>
+<td>2026-09-20</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">122</th>
+<td>20126</td>
+<td>2026-09-20</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">123</th>
+<td>20087</td>
+<td>2026-09-20</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">124</th>
+<td>20157</td>
+<td>2026-09-20</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">125</th>
+<td>20013</td>
+<td>2026-09-20</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">126</th>
+<td>20148</td>
+<td>2026-09-21</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">127</th>
+<td>20152</td>
+<td>2026-09-21</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">128</th>
+<td>20156</td>
+<td>2026-09-21</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">129</th>
+<td>20092</td>
+<td>2026-09-21</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">130</th>
+<td>20100</td>
+<td>2026-09-21</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">131</th>
+<td>20110</td>
+<td>2026-09-21</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">132</th>
+<td>20198</td>
+<td>2026-09-21</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">133</th>
+<td>20192</td>
+<td>2026-09-21</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">134</th>
+<td>20111</td>
+<td>2026-09-21</td>
+<td>Other</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">135</th>
+<td>20162</td>
+<td>2026-09-21</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">136</th>
+<td>20011</td>
+<td>2026-09-21</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">137</th>
+<td>20096</td>
+<td>2026-09-21</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">138</th>
+<td>20040</td>
+<td>2026-09-22</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">139</th>
+<td>20066</td>
+<td>2026-09-22</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">140</th>
+<td>20119</td>
+<td>2026-09-22</td>
+<td>Product defect</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">141</th>
+<td>20027</td>
+<td>2026-09-22</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">142</th>
+<td>20034</td>
+<td>2026-09-22</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">143</th>
+<td>20025</td>
+<td>2026-09-22</td>
+<td>Other</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">144</th>
+<td>20114</td>
+<td>2026-09-22</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">145</th>
+<td>20190</td>
+<td>2026-09-22</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">146</th>
+<td>20062</td>
+<td>2026-09-22</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">147</th>
+<td>20012</td>
+<td>2026-09-22</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">148</th>
+<td>20032</td>
+<td>2026-09-23</td>
+<td>Product defect</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">149</th>
+<td>20053</td>
+<td>2026-09-23</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">150</th>
+<td>20140</td>
+<td>2026-09-23</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">151</th>
+<td>20182</td>
+<td>2026-09-23</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">152</th>
+<td>20185</td>
+<td>2026-09-23</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">153</th>
+<td>20088</td>
+<td>2026-09-23</td>
+<td>Shipping</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">154</th>
+<td>20021</td>
+<td>2026-09-23</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">155</th>
+<td>20189</td>
+<td>2026-09-23</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">156</th>
+<td>20121</td>
+<td>2026-09-23</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">157</th>
+<td>20118</td>
+<td>2026-09-23</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">158</th>
+<td>20147</td>
+<td>2026-09-24</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">159</th>
+<td>20184</td>
+<td>2026-09-24</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">160</th>
+<td>20139</td>
+<td>2026-09-24</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">161</th>
+<td>20103</td>
+<td>2026-09-24</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">162</th>
+<td>20050</td>
+<td>2026-09-24</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">163</th>
+<td>20061</td>
+<td>2026-09-24</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">164</th>
+<td>20167</td>
+<td>2026-09-25</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">165</th>
+<td>20055</td>
+<td>2026-09-25</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">166</th>
+<td>20057</td>
+<td>2026-09-25</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">167</th>
+<td>20135</td>
+<td>2026-09-25</td>
+<td>Login / Password</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">168</th>
+<td>20136</td>
+<td>2026-09-25</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">169</th>
+<td>20045</td>
+<td>2026-09-26</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">170</th>
+<td>20041</td>
+<td>2026-09-26</td>
+<td>Other</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">171</th>
+<td>20039</td>
+<td>2026-09-26</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">172</th>
+<td>20051</td>
+<td>2026-09-26</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">173</th>
+<td>20130</td>
+<td>2026-09-26</td>
+<td>Other</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">174</th>
+<td>20029</td>
+<td>2026-09-26</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">175</th>
+<td>20107</td>
+<td>2026-09-27</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">176</th>
+<td>20124</td>
+<td>2026-09-27</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">177</th>
+<td>20102</td>
+<td>2026-09-27</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">178</th>
+<td>20085</td>
+<td>2026-09-27</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">179</th>
+<td>20181</td>
+<td>2026-09-27</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">180</th>
+<td>20026</td>
+<td>2026-09-27</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">181</th>
+<td>20031</td>
+<td>2026-09-27</td>
+<td>Other</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">182</th>
+<td>20097</td>
+<td>2026-09-28</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">183</th>
+<td>20042</td>
+<td>2026-09-28</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">184</th>
+<td>20071</td>
+<td>2026-09-28</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">185</th>
+<td>20009</td>
+<td>2026-09-28</td>
+<td>Product defect</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">186</th>
+<td>20058</td>
+<td>2026-09-28</td>
+<td>Billing</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">187</th>
+<td>20113</td>
+<td>2026-09-29</td>
+<td>Shipping</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">188</th>
+<td>20197</td>
+<td>2026-09-29</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">189</th>
+<td>20194</td>
+<td>2026-09-29</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">190</th>
+<td>20171</td>
+<td>2026-09-29</td>
+<td>Other</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">191</th>
+<td>20116</td>
+<td>2026-09-29</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">192</th>
+<td>20030</td>
+<td>2026-09-29</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">193</th>
+<td>20172</td>
+<td>2026-09-29</td>
+<td>Login / Password</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">194</th>
+<td>20094</td>
+<td>2026-09-30</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">195</th>
+<td>20133</td>
+<td>2026-09-30</td>
+<td>Billing</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">196</th>
+<td>20048</td>
+<td>2026-09-30</td>
+<td>Product defect</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">197</th>
+<td>20177</td>
+<td>2026-09-30</td>
+<td>Billing</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">198</th>
+<td>20153</td>
+<td>2026-09-30</td>
+<td>Shipping</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">199</th>
+<td>20070</td>
+<td>2026-09-30</td>
+<td>Login / Password</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div class="guess">
+<p><strong>Your guess:</strong> Roughly what share of tickets is about each category? Is one category dominating, or are they spread evenly?</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reveal the pie chart
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="027c39cf" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show the Python code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> tickets[<span class="st">"category"</span>].value_counts()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> sns.color_palette(<span class="st">"Set2"</span>, <span class="bu">len</span>(counts))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">6.5</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ax.pie(counts.values, labels<span class="op">=</span>counts.index, colors<span class="op">=</span>colors, autopct<span class="op">=</span><span class="st">"%1.0f</span><span class="sc">%%</span><span class="st">"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       startangle<span class="op">=</span><span class="dv">90</span>, counterclock<span class="op">=</span><span class="va">False</span>, explode<span class="op">=</span>[<span class="fl">0.06</span>] <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> (<span class="bu">len</span>(counts) <span class="op">-</span> <span class="dv">1</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       wedgeprops<span class="op">=</span>{<span class="st">"edgecolor"</span>: <span class="st">"white"</span>, <span class="st">"linewidth"</span>: <span class="dv">2</span>}, textprops<span class="op">=</span>{<span class="st">"fontsize"</span>: <span class="dv">11</span>})</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Nearly half of all tickets are about billing"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/cell-6-output-1.png" width="874" height="813" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="reveal-note">Billing alone is close to half of all tickets. In the table, “Billing” just looks like one word that comes up “a lot.”</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A note on pie charts
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Pie charts work when you have <strong>a few categories</strong> that <strong>add up to a meaningful whole</strong> and one or two slices matter most, like here. Humans judge angles poorly, so with many similar-sized slices, a sorted bar chart is usually easier to read:</p>
+<div id="c419d286" class="cell" data-fig-height="3.5" data-execution_count="6">
+<details class="code-fold">
+<summary>Show the Python code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>counts.values <span class="op">/</span> counts.<span class="bu">sum</span>() <span class="op">*</span> <span class="dv">100</span>, y<span class="op">=</span>counts.index, color<span class="op">=</span><span class="st">"#2a6f97"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Percent of tickets"</span>, ylabel<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Same data as a sorted bar chart"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/cell-7-output-1.png" width="1180" height="661" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Histograms &amp; Pie Charts"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "The shape of one variable, and parts of a whole"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sim_data <span class="im">import</span> wait_times, ticket_categories</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">"display.max_rows"</span>, <span class="dv">500</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>, font_scale<span class="op">=</span><span class="fl">1.05</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Experiment 1: Customer wait times</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>A support center logged how many minutes each of 240 customers waited before talking to someone.</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>::: {.raw-table}</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>waits <span class="op">=</span> wait_times()</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>waits</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>::: {.guess}</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>**Your guess:** What does a "typical" wait look like? Is there one typical wait time, or more than one? Scroll through the table and decide before opening the chart.</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reveal the histogram</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>waits, x<span class="op">=</span><span class="st">"wait_minutes"</span>, binwidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">"#2a6f97"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>ax.axvline(waits[<span class="st">"wait_minutes"</span>].mean(), color<span class="op">=</span><span class="st">"#d1495b"</span>, ls<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="ss">f"mean = </span><span class="sc">{</span>waits[<span class="st">'wait_minutes'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> min"</span>,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>            xy<span class="op">=</span>(waits[<span class="st">"wait_minutes"</span>].mean(), ax.get_ylim()[<span class="dv">1</span>] <span class="op">*</span> <span class="fl">0.9</span>),</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">0</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, color<span class="op">=</span><span class="st">"#d1495b"</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Wait time (minutes)"</span>, ylabel<span class="op">=</span><span class="st">"Number of customers"</span>,</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Two humps: there are two kinds of customers"</span>)</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">There are **two** typical waits: about 4 minutes and about 17 minutes. (In the simulation these are chat vs. phone customers.) Notice the mean, about 10 minutes, describes almost *nobody*. A single summary number hid the most important fact, and so did the table.</span><span class="co">]</span>{.reveal-note}</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Experiment 2: What are people contacting us about?</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>Here are 200 support tickets from September, sorted by date, the way a ticketing system exports them.</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>::: {.raw-table}</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>tickets <span class="op">=</span> ticket_categories()</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>tickets</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>::: {.guess}</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>**Your guess:** Roughly what share of tickets is about each category? Is one category dominating, or are they spread evenly?</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reveal the pie chart</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> tickets[<span class="st">"category"</span>].value_counts()</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> sns.color_palette(<span class="st">"Set2"</span>, <span class="bu">len</span>(counts))</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">6.5</span>))</span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>ax.pie(counts.values, labels<span class="op">=</span>counts.index, colors<span class="op">=</span>colors, autopct<span class="op">=</span><span class="st">"%1.0f</span><span class="sc">%%</span><span class="st">"</span>,</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>       startangle<span class="op">=</span><span class="dv">90</span>, counterclock<span class="op">=</span><span class="va">False</span>, explode<span class="op">=</span>[<span class="fl">0.06</span>] <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> (<span class="bu">len</span>(counts) <span class="op">-</span> <span class="dv">1</span>),</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>       wedgeprops<span class="op">=</span>{<span class="st">"edgecolor"</span>: <span class="st">"white"</span>, <span class="st">"linewidth"</span>: <span class="dv">2</span>}, textprops<span class="op">=</span>{<span class="st">"fontsize"</span>: <span class="dv">11</span>})</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Nearly half of all tickets are about billing"</span>)</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Billing alone is close to half of all tickets. In the table, "Billing" just looks like one word that comes up "a lot."</span><span class="co">]</span>{.reveal-note}</span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## A note on pie charts</span></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>Pie charts work when you have **a few categories** that **add up to a meaningful whole** and one or two slices matter most, like here. Humans judge angles poorly, so with many similar-sized slices, a sorted bar chart is usually easier to read:</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 3.5</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>counts.values <span class="op">/</span> counts.<span class="bu">sum</span>() <span class="op">*</span> <span class="dv">100</span>, y<span class="op">=</span>counts.index, color<span class="op">=</span><span class="st">"#2a6f97"</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Percent of tickets"</span>, ylabel<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Same data as a sorted bar chart"</span>)</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Built with Quarto, pandas, matplotlib, and seaborn. All data are simulated.</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
