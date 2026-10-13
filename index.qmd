@@ -1,7 +1,9 @@
 ---
-title: "See the Pattern"
+title: "Data Viz"
 subtitle: "Why we draw data instead of staring at it"
 toc: false
+# QUARTO_PYTHON=.venv/bin/python quarto render . # build website
+# QUARTO_PYTHON=.venv/bin/python quarto publish gh-pages # publish on github
 ---
 
 Spreadsheets are great for **storing** data and **looking up** a single value. They are terrible for **seeing patterns**. Our eyes and brains can only hold a handful of numbers at a time, but they can take in the shape of thousands of points at a glance.

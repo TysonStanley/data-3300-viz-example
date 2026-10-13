@@ -3,8 +3,8 @@ project:
   output-dir: _site
 
 website:
-  title: "See the Pattern"
-  description: "Why we visualize data: patterns that hide in spreadsheets jump out of charts."
+  title: "DATA3300 Data Visuals"
+  description: "Visualize data to see the patterns otherwise invisible to us."
   navbar:
     left:
       - href: index.qmd

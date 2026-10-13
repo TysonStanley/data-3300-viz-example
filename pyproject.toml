@@ -1,0 +1,23 @@
+[project]
+name = "data-3300-viz-example"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Tyson Barrett", email = "t.barrett88@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "jupyter>=1.1.1",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "pandas>=3.0.6",
+    "seaborn>=0.13.2",
+]
+
+[project.scripts]
+data-3300-viz-example = "data_3300_viz_example:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
