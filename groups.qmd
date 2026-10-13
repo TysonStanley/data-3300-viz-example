@@ -50,6 +50,21 @@ plt.show()
 [The bar chart answers "which group has the biggest average?" instantly, far faster than the table. But the regions look *about the same*. Is that the whole story?]{.reveal-note}
 :::
 
+::: {.callout-note collapse="true"}
+## Data format for the bar chart
+`sns.barplot()` wants **long** (tidy) data: **one row per observation** (one region on one day), with a **categorical column** that names the group and a **numeric column** holding the value. The table above is already in this shape: 4 regions × 60 days = 240 rows.
+
+| Column | Type | Role in the chart |
+|---|---|---|
+| `region` | text: North, East, West, South | `x` (and `hue` for color): one bar per unique value |
+| `daily_sales` | integer (dollars) | `y`: averaged within each region to set the bar height |
+| `day` | integer, 1–60 | not used by this chart |
+
+You don't compute the averages yourself: `barplot()` groups the rows by `region` and takes the mean of `daily_sales` for each group (`errorbar=None` turns off the uncertainty lines it would otherwise add). The `order=` list must match the values in `region` exactly, spelling and capitalization included.
+
+If your spreadsheet is **wide** instead, with one column per region, reshape it with `melt()` first (see the [Lines Over Time](time.qmd) page). If all you have is a summary table with one average per region, you can still draw the bars, but you've lost the individual days, and with them the spread.
+:::
+
 ## Step 2: Boxplots show the spread
 
 ::: {.callout-tip collapse="true"}
@@ -73,6 +88,19 @@ plt.show()
 - **North** and **East** are steady and predictable.
 
 [A bar chart of means compresses each group to **one number**. A boxplot shows the **median, spread, and outliers**, and overlaying the points shows every single day.]{.reveal-note}
+:::
+
+::: {.callout-note collapse="true"}
+## Data format for the boxplots
+The boxplots use the **same long table** as the bar chart: one row per region per day, with `region` on `x` and `daily_sales` on `y`. Here the data **must be raw, not summarized**. A boxplot computes the median, quartiles, whiskers, and outliers from **every individual value** in each group, and the overlaid `sns.stripplot()` draws **one dot per row**. A table of averages (one number per region) can make a bar chart but can never make a boxplot.
+
+| Column | Type | Role in the chart |
+|---|---|---|
+| `region` | text (categorical) | `x` (and `hue` for color): one box per unique value |
+| `daily_sales` | integer (dollars) | `y`: the values summarized by each box and drawn as dots |
+| `day` | integer, 1–60 | not used by this chart |
+
+Each group needs enough rows for its box to mean something: with only a handful of values, the quartiles and "outliers" are unreliable.
 :::
 
 ::: {.callout-note collapse="true"}

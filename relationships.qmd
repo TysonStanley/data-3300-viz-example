@@ -53,6 +53,19 @@ plt.show()
 [That correlation coefficient, by the way, is r = `{python} f"{scores['hours_studied'].corr(scores['exam_score']):.2f}"`. A single number can't tell you about the curve or the cluster.]{.reveal-note}
 :::
 
+::: {.callout-note collapse="true"}
+## Data format for the scatterplot
+A scatterplot needs **one row per unit** (here, one student) with **two numeric columns measured on that same unit**. Each row becomes one dot, so the two values for a student must sit in the same row. 150 rows means 150 dots.
+
+| Column | Type | Role in the chart |
+|---|---|---|
+| `hours_studied` | numeric (decimal hours) | `x` |
+| `exam_score` | integer, 0–100 | `y` |
+| `student_id` | integer ID | not used; it just identifies each row |
+
+Row order doesn't matter. A row with a missing value in either column can't be placed on the plot, so it's dropped. The correlation `r` above is computed from the same two columns.
+:::
+
 ## Step 2: Color by a third variable
 
 What explains the low-scoring cluster? There's one more column in the spreadsheet: whether the student attended the review session.
@@ -78,4 +91,17 @@ plt.show()
 ```
 
 [Every student in the odd cluster skipped the review session. Finding that from the table means checking 150 rows across three columns; in the chart it's one glance at the red dots.]{.reveal-note}
+:::
+
+::: {.callout-note collapse="true"}
+## Data format for the colored scatterplot
+Same one-row-per-student table, plus **a third column** that holds the grouping used for color:
+
+| Column | Type | Role in the chart |
+|---|---|---|
+| `hours_studied` | numeric (decimal hours) | `x` |
+| `exam_score` | integer, 0–100 | `y` |
+| `attended_review` | text: `"Yes"` or `"No"` | `hue`: sets each dot's color |
+
+The keys of the `palette` dictionary must match the values in `attended_review` exactly (`"Yes"`/`"No"`, not `True`/`False` or `"yes"`). The fitted curve uses only the rows where `attended_review == "Yes"`, sorted by `hours_studied`. If the third column were numeric instead of categorical, `hue=` would color the dots along a continuous color scale rather than in two distinct groups.
 :::

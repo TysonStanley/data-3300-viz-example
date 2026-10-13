@@ -370,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="experiment-which-region-is-performing-best">Experiment: Which region is performing best?</h2>
 <p>A retail chain recorded daily sales for 60 days in each of four regions (240 rows). A manager wants to know which region is doing best and which needs attention.</p>
 <div class="raw-table">
-<div id="1dfbe81d" class="cell" data-execution_count="2">
+<div id="1c0c3f9f" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> store_sales()</span>
@@ -1855,7 +1855,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="e7126c8e" class="cell" data-execution_count="3">
+<div id="2cc864c3" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -1870,7 +1870,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="groups_files/figure-html/cell-4-output-1.png" width="1076" height="626" class="figure-img"></p>
+<p><img src="groups_files/figure-html/cell-4-output-1.png" width="1067" height="624" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1879,11 +1879,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data format for the bar chart
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>sns.barplot()</code> wants <strong>long</strong> (tidy) data: <strong>one row per observation</strong> (one region on one day), with a <strong>categorical column</strong> that names the group and a <strong>numeric column</strong> holding the value. The table above is already in this shape: 4 regions × 60 days = 240 rows.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Type</th>
+<th>Role in the chart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>region</code></td>
+<td>text: North, East, West, South</td>
+<td><code>x</code> (and <code>hue</code> for color): one bar per unique value</td>
+</tr>
+<tr class="even">
+<td><code>daily_sales</code></td>
+<td>integer (dollars)</td>
+<td><code>y</code>: averaged within each region to set the bar height</td>
+</tr>
+<tr class="odd">
+<td><code>day</code></td>
+<td>integer, 1–60</td>
+<td>not used by this chart</td>
+</tr>
+</tbody>
+</table>
+<p>You don’t compute the averages yourself: <code>barplot()</code> groups the rows by <code>region</code> and takes the mean of <code>daily_sales</code> for each group (<code>errorbar=None</code> turns off the uncertainty lines it would otherwise add). The <code>order=</code> list must match the values in <code>region</code> exactly, spelling and capitalization included.</p>
+<p>If your spreadsheet is <strong>wide</strong> instead, with one column per region, reshape it with <code>melt()</code> first (see the <a href="./time.html">Lines Over Time</a> page). If all you have is a summary table with one average per region, you can still draw the bars, but you’ve lost the individual days, and with them the spread.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="step-2-boxplots-show-the-spread" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-boxplots-show-the-spread">Step 2: Boxplots show the spread</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1892,9 +1941,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="5fbde162" class="cell" data-execution_count="4">
+<div id="8a93a9b1" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -1909,7 +1958,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="groups_files/figure-html/cell-5-output-1.png" width="1091" height="626" class="figure-img"></p>
+<p><img src="groups_files/figure-html/cell-5-output-1.png" width="1081" height="624" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1925,7 +1974,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data format for the boxplots
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The boxplots use the <strong>same long table</strong> as the bar chart: one row per region per day, with <code>region</code> on <code>x</code> and <code>daily_sales</code> on <code>y</code>. Here the data <strong>must be raw, not summarized</strong>. A boxplot computes the median, quartiles, whiskers, and outliers from <strong>every individual value</strong> in each group, and the overlaid <code>sns.stripplot()</code> draws <strong>one dot per row</strong>. A table of averages (one number per region) can make a bar chart but can never make a boxplot.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Type</th>
+<th>Role in the chart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>region</code></td>
+<td>text (categorical)</td>
+<td><code>x</code> (and <code>hue</code> for color): one box per unique value</td>
+</tr>
+<tr class="even">
+<td><code>daily_sales</code></td>
+<td>integer (dollars)</td>
+<td><code>y</code>: the values summarized by each box and drawn as dots</td>
+</tr>
+<tr class="odd">
+<td><code>day</code></td>
+<td>integer, 1–60</td>
+<td>not used by this chart</td>
+</tr>
+</tbody>
+</table>
+<p>Each group needs enough rows for its box to mean something: with only a handful of values, the quartiles and “outliers” are unreliable.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1934,10 +2031,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The same story <em>is</em> in the numbers if you know which ones to compute. But you need to already suspect what to look for:</p>
-<div id="8851f762" class="cell" data-execution_count="5">
+<div id="39c02372" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(sales.groupby(<span class="st">"region"</span>)[<span class="st">"daily_sales"</span>]</span>
@@ -2533,44 +2630,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">The bar chart answers "which group has the biggest average?" instantly, far faster than the table. But the regions look *about the same*. Is that the whole story?</span><span class="co">]</span>{.reveal-note}</span>
 <span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 2: Boxplots show the spread</span></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reveal the boxplots</span></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>sales, x<span class="op">=</span><span class="st">"region"</span>, y<span class="op">=</span><span class="st">"daily_sales"</span>, order<span class="op">=</span>region_order,</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"region"</span>, palette<span class="op">=</span>palette, width<span class="op">=</span><span class="fl">0.55</span>, fliersize<span class="op">=</span><span class="dv">0</span>, ax<span class="op">=</span>ax, legend<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>sns.stripplot(data<span class="op">=</span>sales, x<span class="op">=</span><span class="st">"region"</span>, y<span class="op">=</span><span class="st">"daily_sales"</span>, order<span class="op">=</span>region_order,</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>              color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.35</span>, size<span class="op">=</span><span class="fl">3.5</span>, jitter<span class="op">=</span><span class="fl">0.18</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">""</span>, ylabel<span class="op">=</span><span class="st">"Daily sales ($)"</span>,</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Similar averages, very different stories"</span>)</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Now the real differences appear:</span><span class="co">]</span>{.reveal-note}</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data format for the bar chart</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="in">`sns.barplot()`</span> wants **long** (tidy) data: **one row per observation** (one region on one day), with a **categorical column** that names the group and a **numeric column** holding the value. The table above is already in this shape: 4 regions × 60 days = 240 rows.</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Role in the chart <span class="pp">|</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`region`</span> <span class="pp">|</span> text: North, East, West, South <span class="pp">|</span> <span class="in">`x`</span> (and <span class="in">`hue`</span> for color): one bar per unique value <span class="pp">|</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`daily_sales`</span> <span class="pp">|</span> integer (dollars) <span class="pp">|</span> <span class="in">`y`</span>: averaged within each region to set the bar height <span class="pp">|</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`day`</span> <span class="pp">|</span> integer, 1–60 <span class="pp">|</span> not used by this chart <span class="pp">|</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>You don't compute the averages yourself: <span class="in">`barplot()`</span> groups the rows by <span class="in">`region`</span> and takes the mean of <span class="in">`daily_sales`</span> for each group (<span class="in">`errorbar=None`</span> turns off the uncertainty lines it would otherwise add). The <span class="in">`order=`</span> list must match the values in <span class="in">`region`</span> exactly, spelling and capitalization included.</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>If your spreadsheet is **wide** instead, with one column per region, reshape it with <span class="in">`melt()`</span> first (see the <span class="co">[</span><span class="ot">Lines Over Time</span><span class="co">](time.qmd)</span> page). If all you have is a summary table with one average per region, you can still draw the bars, but you've lost the individual days, and with them the spread.</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 2: Boxplots show the spread</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reveal the boxplots</span></span>
 <span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**West** is wildly inconsistent: some days are the best in the company, others the worst. Its average hides that.</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**South** is actually the *lowest* on a normal day. Its average is propped up by **5 huge outlier days** (a sale event? a data entry error?), worth investigating.</span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**North** and **East** are steady and predictable.</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">A bar chart of means compresses each group to **one number**. A boxplot shows the **median, spread, and outliers**, and overlaying the points shows every single day.</span><span class="co">]</span>{.reveal-note}</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## The numbers, for comparison</span></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>The same story *is* in the numbers if you know which ones to compute. But you need to already suspect what to look for:</span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>(sales.groupby(<span class="st">"region"</span>)[<span class="st">"daily_sales"</span>]</span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>      .agg(mean<span class="op">=</span><span class="st">"mean"</span>, median<span class="op">=</span><span class="st">"median"</span>, sd<span class="op">=</span><span class="st">"std"</span>, <span class="bu">min</span><span class="op">=</span><span class="st">"min"</span>, <span class="bu">max</span><span class="op">=</span><span class="st">"max"</span>)</span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>      .loc[region_order]</span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">round</span>(<span class="dv">0</span>))</span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>sales, x<span class="op">=</span><span class="st">"region"</span>, y<span class="op">=</span><span class="st">"daily_sales"</span>, order<span class="op">=</span>region_order,</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"region"</span>, palette<span class="op">=</span>palette, width<span class="op">=</span><span class="fl">0.55</span>, fliersize<span class="op">=</span><span class="dv">0</span>, ax<span class="op">=</span>ax, legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>sns.stripplot(data<span class="op">=</span>sales, x<span class="op">=</span><span class="st">"region"</span>, y<span class="op">=</span><span class="st">"daily_sales"</span>, order<span class="op">=</span>region_order,</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>              color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.35</span>, size<span class="op">=</span><span class="fl">3.5</span>, jitter<span class="op">=</span><span class="fl">0.18</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">""</span>, ylabel<span class="op">=</span><span class="st">"Daily sales ($)"</span>,</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Similar averages, very different stories"</span>)</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Now the real differences appear:</span><span class="co">]</span>{.reveal-note}</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**West** is wildly inconsistent: some days are the best in the company, others the worst. Its average hides that.</span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**South** is actually the *lowest* on a normal day. Its average is propped up by **5 huge outlier days** (a sale event? a data entry error?), worth investigating.</span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**North** and **East** are steady and predictable.</span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">A bar chart of means compresses each group to **one number**. A boxplot shows the **median, spread, and outliers**, and overlaying the points shows every single day.</span><span class="co">]</span>{.reveal-note}</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data format for the boxplots</span></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>The boxplots use the **same long table** as the bar chart: one row per region per day, with `region` on `x` and `daily_sales` on `y`. Here the data **must be raw, not summarized**. A boxplot computes the median, quartiles, whiskers, and outliers from **every individual value** in each group, and the overlaid `sns.stripplot()` draws **one dot per row**. A table of averages (one number per region) can make a bar chart but can never make a boxplot.</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Role in the chart <span class="pp">|</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`region`</span> <span class="pp">|</span> text (categorical) <span class="pp">|</span> <span class="in">`x`</span> (and <span class="in">`hue`</span> for color): one box per unique value <span class="pp">|</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`daily_sales`</span> <span class="pp">|</span> integer (dollars) <span class="pp">|</span> <span class="in">`y`</span>: the values summarized by each box and drawn as dots <span class="pp">|</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`day`</span> <span class="pp">|</span> integer, 1–60 <span class="pp">|</span> not used by this chart <span class="pp">|</span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>Each group needs enough rows for its box to mean something: with only a handful of values, the quartiles and "outliers" are unreliable.</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## The numbers, for comparison</span></span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>The same story *is* in the numbers if you know which ones to compute. But you need to already suspect what to look for:</span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>(sales.groupby(<span class="st">"region"</span>)[<span class="st">"daily_sales"</span>]</span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>      .agg(mean<span class="op">=</span><span class="st">"mean"</span>, median<span class="op">=</span><span class="st">"median"</span>, sd<span class="op">=</span><span class="st">"std"</span>, <span class="bu">min</span><span class="op">=</span><span class="st">"min"</span>, <span class="bu">max</span><span class="op">=</span><span class="st">"max"</span>)</span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>      .loc[region_order]</span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">round</span>(<span class="dv">0</span>))</span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

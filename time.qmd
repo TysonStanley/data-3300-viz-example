@@ -64,6 +64,24 @@ plt.show()
 :::
 
 ::: {.callout-note collapse="true"}
+## Data format for the grouped line plot
+The table above is **wide** (one column per product line), but `sns.lineplot()` with `hue=` needs **long** data: **one row per product line per month**. Three years of monthly data for three product lines is 36 × 3 = 108 rows in `visits_long`.
+
+| Column | Type | Role in the chart |
+|---|---|---|
+| `month` | date (`datetime64`, first day of each month) | `x`: the time axis |
+| `product_line` | text: Outdoor gear, Smart home, Office supplies | `hue`: one line per unique value |
+| `visits` | integer | `y` |
+
+Two details matter:
+
+- **`month` must be real dates, not text.** In the wide table it's stored as text like `"2025-01"`. The "Site redesign" marker (`pd.Timestamp("2025-01-01")`) and the date-axis labels (`mdates`) only work on a true date column. Starting from text, convert with `pd.to_datetime()`.
+- **One row per group per time point.** If a product line had several rows for the same month, `lineplot()` would average them and draw a shaded uncertainty band instead of a single clean line.
+
+The keys of the `palette` dictionary must match the `product_line` values exactly. See the note below for converting wide data to long.
+:::
+
+::: {.callout-note collapse="true"}
 ## Wide vs. long data
 Spreadsheets usually store time series **wide** (one column per group). `seaborn` wants data **long** (one row per observation, with a column naming the group), which makes `hue=` work. Converting is one line with `pandas`:
 

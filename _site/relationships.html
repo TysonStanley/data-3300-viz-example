@@ -370,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="experiment-does-studying-more-pay-off">Experiment: Does studying more pay off?</h2>
 <p>An instructor recorded how many hours each of 150 students studied for an exam and the score they earned.</p>
 <div class="raw-table">
-<div id="54499c03" class="cell" data-execution_count="2">
+<div id="f69797c7" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> study_scores()</span>
@@ -1315,7 +1315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="c916c2ab" class="cell" data-execution_count="3">
+<div id="885df180" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -1328,7 +1328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="relationships_files/figure-html/cell-4-output-1.png" width="1060" height="661" class="figure-img"></p>
+<p><img src="relationships_files/figure-html/cell-4-output-1.png" width="1053" height="657" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1343,12 +1343,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data format for the scatterplot
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A scatterplot needs <strong>one row per unit</strong> (here, one student) with <strong>two numeric columns measured on that same unit</strong>. Each row becomes one dot, so the two values for a student must sit in the same row. 150 rows means 150 dots.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Type</th>
+<th>Role in the chart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>hours_studied</code></td>
+<td>numeric (decimal hours)</td>
+<td><code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>exam_score</code></td>
+<td>integer, 0–100</td>
+<td><code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>student_id</code></td>
+<td>integer ID</td>
+<td>not used; it just identifies each row</td>
+</tr>
+</tbody>
+</table>
+<p>Row order doesn’t matter. A row with a missing value in either column can’t be placed on the plot, so it’s dropped. The correlation <code>r</code> above is computed from the same two columns.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="step-2-color-by-a-third-variable" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-color-by-a-third-variable">Step 2: Color by a third variable</h2>
 <p>What explains the low-scoring cluster? There’s one more column in the spreadsheet: whether the student attended the review session.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1357,9 +1400,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="69d796c9" class="cell" data-execution_count="4">
+<div id="1c89cf95" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the Python code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -1380,12 +1423,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="relationships_files/figure-html/cell-5-output-1.png" width="1060" height="661" class="figure-img"></p>
+<p><img src="relationships_files/figure-html/cell-5-output-1.png" width="1053" height="657" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><span class="reveal-note">Every student in the odd cluster skipped the review session. Finding that from the table means checking 150 rows across three columns; in the chart it’s one glance at the red dots.</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data format for the colored scatterplot
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Same one-row-per-student table, plus <strong>a third column</strong> that holds the grouping used for color:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Type</th>
+<th>Role in the chart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>hours_studied</code></td>
+<td>numeric (decimal hours)</td>
+<td><code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>exam_score</code></td>
+<td>integer, 0–100</td>
+<td><code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>attended_review</code></td>
+<td>text: <code>"Yes"</code> or <code>"No"</code></td>
+<td><code>hue</code>: sets each dot’s color</td>
+</tr>
+</tbody>
+</table>
+<p>The keys of the <code>palette</code> dictionary must match the values in <code>attended_review</code> exactly (<code>"Yes"</code>/<code>"No"</code>, not <code>True</code>/<code>False</code> or <code>"yes"</code>). The fitted curve uses only the rows where <code>attended_review == "Yes"</code>, sorted by <code>hours_studied</code>. If the third column were numeric instead of categorical, <code>hue=</code> would color the dots along a continuous color scale rather than in two distinct groups.</p>
 </div>
 </div>
 </div>
@@ -1915,32 +2006,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">That correlation coefficient, by the way, is r = `{python} f"{scores['hours_studied'].corr(scores['exam_score']):.2f}"`. A single number can't tell you about the curve or the cluster.</span><span class="co">]</span>{.reveal-note}</span>
 <span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 2: Color by a third variable</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>What explains the low-scoring cluster? There's one more column in the spreadsheet: whether the student attended the review session.</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data format for the scatterplot</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>A scatterplot needs **one row per unit** (here, one student) with **two numeric columns measured on that same unit**. Each row becomes one dot, so the two values for a student must sit in the same row. 150 rows means 150 dots.</span>
 <span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reveal the colored scatterplot</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>scores, x<span class="op">=</span><span class="st">"hours_studied"</span>, y<span class="op">=</span><span class="st">"exam_score"</span>, hue<span class="op">=</span><span class="st">"attended_review"</span>,</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span>{<span class="st">"Yes"</span>: <span class="st">"#2a6f97"</span>, <span class="st">"No"</span>: <span class="st">"#d1495b"</span>}, s<span class="op">=</span><span class="dv">45</span>, alpha<span class="op">=</span><span class="fl">0.85</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Smooth curve for students who attended, to show the bend</span></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>yes <span class="op">=</span> scores[scores[<span class="st">"attended_review"</span>] <span class="op">==</span> <span class="st">"Yes"</span>].sort_values(<span class="st">"hours_studied"</span>)</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>fit <span class="op">=</span> np.polyfit(np.log1p(yes[<span class="st">"hours_studied"</span>]), yes[<span class="st">"exam_score"</span>], <span class="dv">1</span>)</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">200</span>)</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>ax.plot(grid, np.polyval(fit, np.log1p(grid)), color<span class="op">=</span><span class="st">"#2a6f97"</span>, lw<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Role in the chart <span class="pp">|</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`hours_studied`</span> <span class="pp">|</span> numeric (decimal hours) <span class="pp">|</span> <span class="in">`x`</span> <span class="pp">|</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`exam_score`</span> <span class="pp">|</span> integer, 0–100 <span class="pp">|</span> <span class="in">`y`</span> <span class="pp">|</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`student_id`</span> <span class="pp">|</span> integer ID <span class="pp">|</span> not used; it just identifies each row <span class="pp">|</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>Row order doesn't matter. A row with a missing value in either column can't be placed on the plot, so it's dropped. The correlation <span class="in">`r`</span> above is computed from the same two columns.</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 2: Color by a third variable</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>What explains the low-scoring cluster? There's one more column in the spreadsheet: whether the student attended the review session.</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reveal the colored scatterplot</span></span>
 <span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Hours studied"</span>, ylabel<span class="op">=</span><span class="st">"Exam score"</span>,</span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"The outliers all skipped the review session"</span>)</span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>ax.legend(title<span class="op">=</span><span class="st">"Attended review"</span>)</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Every student in the odd cluster skipped the review session. Finding that from the table means checking 150 rows across three columns; in the chart it's one glance at the red dots.</span><span class="co">]</span>{.reveal-note}</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>scores, x<span class="op">=</span><span class="st">"hours_studied"</span>, y<span class="op">=</span><span class="st">"exam_score"</span>, hue<span class="op">=</span><span class="st">"attended_review"</span>,</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span>{<span class="st">"Yes"</span>: <span class="st">"#2a6f97"</span>, <span class="st">"No"</span>: <span class="st">"#d1495b"</span>}, s<span class="op">=</span><span class="dv">45</span>, alpha<span class="op">=</span><span class="fl">0.85</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Smooth curve for students who attended, to show the bend</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>yes <span class="op">=</span> scores[scores[<span class="st">"attended_review"</span>] <span class="op">==</span> <span class="st">"Yes"</span>].sort_values(<span class="st">"hours_studied"</span>)</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>fit <span class="op">=</span> np.polyfit(np.log1p(yes[<span class="st">"hours_studied"</span>]), yes[<span class="st">"exam_score"</span>], <span class="dv">1</span>)</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">200</span>)</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>ax.plot(grid, np.polyval(fit, np.log1p(grid)), color<span class="op">=</span><span class="st">"#2a6f97"</span>, lw<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Hours studied"</span>, ylabel<span class="op">=</span><span class="st">"Exam score"</span>,</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"The outliers all skipped the review session"</span>)</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>ax.legend(title<span class="op">=</span><span class="st">"Attended review"</span>)</span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Every student in the odd cluster skipped the review session. Finding that from the table means checking 150 rows across three columns; in the chart it's one glance at the red dots.</span><span class="co">]</span>{.reveal-note}</span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data format for the colored scatterplot</span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>Same one-row-per-student table, plus **a third column** that holds the grouping used for color:</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Role in the chart <span class="pp">|</span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`hours_studied`</span> <span class="pp">|</span> numeric (decimal hours) <span class="pp">|</span> <span class="in">`x`</span> <span class="pp">|</span></span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`exam_score`</span> <span class="pp">|</span> integer, 0–100 <span class="pp">|</span> <span class="in">`y`</span> <span class="pp">|</span></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`attended_review`</span> <span class="pp">|</span> text: <span class="in">`"Yes"`</span> or <span class="in">`"No"`</span> <span class="pp">|</span> <span class="in">`hue`</span>: sets each dot's color <span class="pp">|</span></span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>The keys of the <span class="in">`palette`</span> dictionary must match the values in <span class="in">`attended_review`</span> exactly (<span class="in">`"Yes"`</span>/<span class="in">`"No"`</span>, not <span class="in">`True`</span>/<span class="in">`False`</span> or <span class="in">`"yes"`</span>). The fitted curve uses only the rows where <span class="in">`attended_review == "Yes"`</span>, sorted by <span class="in">`hours_studied`</span>. If the third column were numeric instead of categorical, <span class="in">`hue=`</span> would color the dots along a continuous color scale rather than in two distinct groups.</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

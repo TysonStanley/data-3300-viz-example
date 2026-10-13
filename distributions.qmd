@@ -48,6 +48,18 @@ plt.show()
 [There are **two** typical waits: about 4 minutes and about 17 minutes. (In the simulation these are chat vs. phone customers.) Notice the mean, about 10 minutes, describes almost *nobody*. A single summary number hid the most important fact, and so did the table.]{.reveal-note}
 :::
 
+::: {.callout-note collapse="true"}
+## Data format for the histogram
+A histogram needs **one numeric column** with **one row per observation** (here, one row per customer, 240 rows). Leave the values raw: don't bin or count them yourself, because `sns.histplot()` sorts the values into bins and counts how many land in each.
+
+| Column | Type | Role in the chart |
+|---|---|---|
+| `wait_minutes` | numeric (decimal minutes) | `x`: the values that get binned and counted |
+| `ticket_id` | integer ID | not used; it just identifies each row |
+
+Row order doesn't matter, and any missing values in `wait_minutes` are simply left out.
+:::
+
 ## Experiment 2: What are people contacting us about?
 
 Here are 200 support tickets from September, sorted by date, the way a ticketing system exports them.
@@ -79,6 +91,26 @@ plt.show()
 ```
 
 [Billing alone is close to half of all tickets. In the table, "Billing" just looks like one word that comes up "a lot."]{.reveal-note}
+:::
+
+::: {.callout-note collapse="true"}
+## Data format for the pie chart
+A pie chart needs **one number per category**: the size of each slice. The categories must be **mutually exclusive** (each ticket falls in exactly one) and together make up a **meaningful whole** (all tickets).
+
+The export arrives as **one row per ticket** (200 rows), so it has to be counted up first:
+
+| Column | Type | Role in the chart |
+|---|---|---|
+| `category` | text (categorical) | defines the slices; every ticket has exactly one category |
+| `ticket_id`, `date`, `priority` | ID, date, text | not used by this chart |
+
+`tickets["category"].value_counts()` turns that into `counts`, a pandas Series with **one entry per category** (5 entries), sorted largest to smallest:
+
+| Index (label) | Value |
+|---|---|
+| each category name, e.g. `Billing` | number of tickets in that category |
+
+`ax.pie()` then takes `counts.values` as the slice sizes and `counts.index` as the labels. Because the counts are sorted, `explode=[0.06] + [0] * ...` pulls out the first (largest) slice. If your spreadsheet already has a summary table, with one row per category and a count column, you can skip `value_counts()` and pass those two columns straight to `ax.pie()`. The sorted bar chart in the note below uses the same `counts`.
 :::
 
 ::: {.callout-note collapse="true"}
