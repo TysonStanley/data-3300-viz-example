@@ -5,6 +5,8 @@ project:
 website:
   title: "DATA3300 Data Visuals"
   description: "Visualize data to see the patterns otherwise invisible to us."
+  site-url: "https://tysonbarrett.com/data-3300-viz-example/"
+  repo-url: "https://github.com/TysonStanley/data-3300-viz-example"
   navbar:
     left:
       - href: index.qmd

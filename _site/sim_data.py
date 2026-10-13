@@ -1,5 +1,6 @@
 """
-Simulated datasets for the "See the Pattern" site.
+Simulated datasets for the DATA 3300 Data Visuals site
+(https://tysonbarrett.com/data-3300-viz-example/).
 
 Every dataset has a clear pattern baked in, and every dataset is shuffled
 so the pattern is NOT visible from row order. That is the whole point:
