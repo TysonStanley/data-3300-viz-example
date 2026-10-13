@@ -1,1 +1,1 @@
-Sitemap: https://TysonStanley.github.io/see-the-pattern/sitemap.xml
+Sitemap: https://tysonbarrett.com/data-3300-viz-example/sitemap.xml
