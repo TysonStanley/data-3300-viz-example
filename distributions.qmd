@@ -1,0 +1,95 @@
+---
+title: "Histograms & Pie Charts"
+subtitle: "The shape of one variable, and parts of a whole"
+---
+
+```{python}
+#| echo: false
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sim_data import wait_times, ticket_categories
+
+pd.set_option("display.max_rows", 500)
+sns.set_theme(style="whitegrid", font_scale=1.05)
+```
+
+## Experiment 1: Customer wait times
+
+A support center logged how many minutes each of 240 customers waited before talking to someone.
+
+::: {.raw-table}
+```{python}
+#| code-fold: true
+waits = wait_times()
+waits
+```
+:::
+
+::: {.guess}
+**Your guess:** What does a "typical" wait look like? Is there one typical wait time, or more than one? Scroll through the table and decide before opening the chart.
+:::
+
+::: {.callout-tip collapse="true"}
+## Reveal the histogram
+
+```{python}
+fig, ax = plt.subplots()
+sns.histplot(data=waits, x="wait_minutes", binwidth=1, color="#2a6f97", ax=ax)
+ax.axvline(waits["wait_minutes"].mean(), color="#d1495b", ls="--", lw=2)
+ax.annotate(f"mean = {waits['wait_minutes'].mean():.1f} min",
+            xy=(waits["wait_minutes"].mean(), ax.get_ylim()[1] * 0.9),
+            xytext=(8, 0), textcoords="offset points", color="#d1495b")
+ax.set(xlabel="Wait time (minutes)", ylabel="Number of customers",
+       title="Two humps: there are two kinds of customers")
+plt.show()
+```
+
+[There are **two** typical waits: about 4 minutes and about 17 minutes. (In the simulation these are chat vs. phone customers.) Notice the mean, about 10 minutes, describes almost *nobody*. A single summary number hid the most important fact, and so did the table.]{.reveal-note}
+:::
+
+## Experiment 2: What are people contacting us about?
+
+Here are 200 support tickets from September, sorted by date, the way a ticketing system exports them.
+
+::: {.raw-table}
+```{python}
+tickets = ticket_categories()
+tickets
+```
+:::
+
+::: {.guess}
+**Your guess:** Roughly what share of tickets is about each category? Is one category dominating, or are they spread evenly?
+:::
+
+::: {.callout-tip collapse="true"}
+## Reveal the pie chart
+
+```{python}
+counts = tickets["category"].value_counts()
+colors = sns.color_palette("Set2", len(counts))
+
+fig, ax = plt.subplots(figsize=(6.5, 6.5))
+ax.pie(counts.values, labels=counts.index, colors=colors, autopct="%1.0f%%",
+       startangle=90, counterclock=False, explode=[0.06] + [0] * (len(counts) - 1),
+       wedgeprops={"edgecolor": "white", "linewidth": 2}, textprops={"fontsize": 11})
+ax.set_title("Nearly half of all tickets are about billing")
+plt.show()
+```
+
+[Billing alone is close to half of all tickets. In the table, "Billing" just looks like one word that comes up "a lot."]{.reveal-note}
+:::
+
+::: {.callout-note collapse="true"}
+## A note on pie charts
+Pie charts work when you have **a few categories** that **add up to a meaningful whole** and one or two slices matter most, like here. Humans judge angles poorly, so with many similar-sized slices, a sorted bar chart is usually easier to read:
+
+```{python}
+#| fig-height: 3.5
+fig, ax = plt.subplots()
+sns.barplot(x=counts.values / counts.sum() * 100, y=counts.index, color="#2a6f97", ax=ax)
+ax.set(xlabel="Percent of tickets", ylabel="", title="Same data as a sorted bar chart")
+plt.show()
+```
+:::

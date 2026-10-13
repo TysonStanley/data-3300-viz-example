@@ -1,0 +1,90 @@
+---
+title: "Bar Charts & Boxplots"
+subtitle: "Comparing groups, and why the average isn't the whole story"
+---
+
+```{python}
+#| echo: false
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sim_data import store_sales
+
+pd.set_option("display.max_rows", 500)
+sns.set_theme(style="whitegrid", font_scale=1.05)
+region_order = ["North", "East", "West", "South"]
+palette = dict(zip(region_order, sns.color_palette("Set2", 4)))
+```
+
+## Experiment: Which region is performing best?
+
+A retail chain recorded daily sales for 60 days in each of four regions (240 rows). A manager wants to know which region is doing best and which needs attention.
+
+::: {.raw-table}
+```{python}
+sales = store_sales()
+sales
+```
+:::
+
+::: {.guess}
+**Your guess:** Which region has the highest typical daily sales? Which region is the *least predictable* from day to day? Do any regions have unusual days?
+:::
+
+## Step 1: A bar chart of averages
+
+::: {.callout-tip collapse="true"}
+## Reveal the bar chart
+
+```{python}
+fig, ax = plt.subplots()
+sns.barplot(data=sales, x="region", y="daily_sales", order=region_order,
+            hue="region", palette=palette, errorbar=None, ax=ax, legend=False)
+for container in ax.containers:
+    ax.bar_label(container, fmt="${:,.0f}", padding=3)
+ax.set(xlabel="", ylabel="Average daily sales ($)", title="Average daily sales by region")
+ax.set_ylim(0, 6800)
+plt.show()
+```
+
+[The bar chart answers "which group has the biggest average?" instantly, far faster than the table. But the regions look *about the same*. Is that the whole story?]{.reveal-note}
+:::
+
+## Step 2: Boxplots show the spread
+
+::: {.callout-tip collapse="true"}
+## Reveal the boxplots
+
+```{python}
+fig, ax = plt.subplots()
+sns.boxplot(data=sales, x="region", y="daily_sales", order=region_order,
+            hue="region", palette=palette, width=0.55, fliersize=0, ax=ax, legend=False)
+sns.stripplot(data=sales, x="region", y="daily_sales", order=region_order,
+              color="black", alpha=0.35, size=3.5, jitter=0.18, ax=ax)
+ax.set(xlabel="", ylabel="Daily sales ($)",
+       title="Similar averages, very different stories")
+plt.show()
+```
+
+[Now the real differences appear:]{.reveal-note}
+
+- **West** is wildly inconsistent: some days are the best in the company, others the worst. Its average hides that.
+- **South** is actually the *lowest* on a normal day. Its average is propped up by **5 huge outlier days** (a sale event? a data entry error?), worth investigating.
+- **North** and **East** are steady and predictable.
+
+[A bar chart of means compresses each group to **one number**. A boxplot shows the **median, spread, and outliers**, and overlaying the points shows every single day.]{.reveal-note}
+:::
+
+::: {.callout-note collapse="true"}
+## The numbers, for comparison
+
+The same story *is* in the numbers if you know which ones to compute. But you need to already suspect what to look for:
+
+```{python}
+#| echo: true
+(sales.groupby("region")["daily_sales"]
+      .agg(mean="mean", median="median", sd="std", min="min", max="max")
+      .loc[region_order]
+      .round(0))
+```
+:::

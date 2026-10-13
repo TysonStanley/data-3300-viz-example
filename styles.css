@@ -1,0 +1,34 @@
+/* Scrollable "spreadsheet" boxes so the raw data feels like a wall of numbers */
+.raw-table {
+  max-height: 380px;
+  overflow: auto;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+.raw-table table {
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+.raw-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bs-body-bg);
+  z-index: 1;
+}
+
+/* The "make a guess" prompt */
+.guess {
+  border-left: 4px solid #e8a33d;
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+  background: rgba(232, 163, 61, 0.08);
+  border-radius: 0 6px 6px 0;
+}
+.guess strong:first-child { color: #c47f17; }
+
+.reveal-note {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}

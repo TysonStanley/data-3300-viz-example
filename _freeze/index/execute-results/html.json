@@ -1,0 +1,12 @@
+{
+  "hash": "cc9a76d6711eec2507475ff599fed842",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"See the Pattern\"\nsubtitle: \"Why we draw data instead of staring at it\"\ntoc: false\n---\n\nSpreadsheets are great for **storing** data and **looking up** a single value. They are terrible for **seeing patterns**. Our eyes and brains can only hold a handful of numbers at a time, but they can take in the shape of thousands of points at a glance.\n\nEach page on this site runs the same little experiment:\n\n1. **The spreadsheet.** You get the raw data, just like you'd receive it in a CSV.\n2. **Your guess.** A question about the data. Try to answer it by scanning the table. Give yourself a minute (really!).\n3. **The reveal.** Open the chart and see how long the same answer takes.\n\n::: {#16b97533 .cell fig-height='3.6' execution_count=1}\n\n::: {.cell-output .cell-output-display}\n![](index_files/figure-html/cell-2-output-1.png){width=1326 height=486}\n:::\n:::\n\n\n## The experiments\n\n| Page | Charts | The hidden pattern is about… |\n|---|---|---|\n| [Histograms & Pie Charts](distributions.qmd) | histogram, pie chart | the **shape** of one variable and **parts of a whole** |\n| [Bar Charts & Boxplots](groups.qmd) | bar chart, multi-boxplot | **comparing groups**, and why averages can lie |\n| [Scatterplots](relationships.qmd) | scatterplot | the **relationship** between two numeric variables |\n| [Lines Over Time](time.qmd) | grouped line plot | **trends, seasons, and sudden changes** over time |\n\n::: {.callout-note}\n## Every chart shows its code\nClick **\"Show the Python code\"** above any chart to see exactly how it was made with `pandas`, `matplotlib`, and `seaborn`. The data are simulated in [`sim_data.py`](sim_data.py) with a fixed random seed, so everyone sees the same numbers.\n:::\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

@@ -1,0 +1,41 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "See the Pattern"
+  description: "Why we visualize data: patterns that hide in spreadsheets jump out of charts."
+  navbar:
+    left:
+      - href: index.qmd
+        text: Start here
+      - href: distributions.qmd
+        text: Histograms & Pie Charts
+      - href: groups.qmd
+        text: Bar Charts & Boxplots
+      - href: relationships.qmd
+        text: Scatterplots
+      - href: time.qmd
+        text: Lines Over Time
+  page-navigation: true
+  page-footer:
+    center: "Built with Quarto, pandas, matplotlib, and seaborn. All data are simulated."
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    code-fold: true
+    code-summary: "Show the Python code"
+    code-tools: true
+    fig-width: 8
+    fig-height: 4.5
+    fig-dpi: 150
+
+execute:
+  echo: true
+  warning: false
+  freeze: auto

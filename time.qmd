@@ -1,0 +1,75 @@
+---
+title: "Lines Over Time"
+subtitle: "Trends, seasons, and sudden changes"
+---
+
+```{python}
+#| echo: false
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import seaborn as sns
+from sim_data import monthly_visits
+
+pd.set_option("display.max_rows", 500)
+sns.set_theme(style="whitegrid", font_scale=1.05)
+```
+
+## Experiment: How is web traffic changing?
+
+An online store tracks monthly visits to three product sections. Here are three years of data in the "wide" format most spreadsheets use, with one column per product line.
+
+::: {.raw-table}
+```{python}
+visits_long, visits_wide = monthly_visits()
+visits_wide
+```
+:::
+
+::: {.guess}
+**Your guess:** For each product line, describe what's happening over time. Growing? Shrinking? Cyclical? Did anything change suddenly?
+:::
+
+::: {.callout-tip collapse="true"}
+## Reveal the grouped line plot
+
+```{python}
+#| fig-height: 5
+palette = {"Outdoor gear": "#00798c", "Smart home": "#edae49", "Office supplies": "#d1495b"}
+
+fig, ax = plt.subplots(figsize=(9, 5))
+sns.lineplot(data=visits_long, x="month", y="visits", hue="product_line",
+             palette=palette, marker="o", markersize=4, lw=2, ax=ax)
+
+ax.axvline(pd.Timestamp("2025-01-01"), color="gray", ls=":", lw=1.5)
+ax.text(pd.Timestamp("2025-01-15"), ax.get_ylim()[1] * 0.97, "Site redesign",
+        color="gray", va="top")
+
+ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[1, 7]))
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%b\n%Y"))
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v/1000:.0f}k"))
+ax.set(xlabel="", ylabel="Monthly visits", title="Three product lines, three different stories")
+ax.legend(title="", loc="upper center", bbox_to_anchor=(0.5, -0.14), ncol=3, frameon=False)
+plt.tight_layout()
+plt.show()
+```
+
+[Each line tells a different story, and you can read all three in seconds:]{.reveal-note}
+
+- **Outdoor gear** is **seasonal**: it peaks every summer and bottoms out every winter.
+- **Smart home** is **steadily growing**, more than doubling over three years.
+- **Office supplies** was flat, then **dropped about 40%** right when the site was redesigned. That's a problem worth investigating.
+
+[In the table, the seasonal swing looks like noise, the steady growth is spread across 36 rows, and the drop is just one column of numbers getting a bit smaller partway down.]{.reveal-note}
+:::
+
+::: {.callout-note collapse="true"}
+## Wide vs. long data
+Spreadsheets usually store time series **wide** (one column per group). `seaborn` wants data **long** (one row per observation, with a column naming the group), which makes `hue=` work. Converting is one line with `pandas`:
+
+```{python}
+#| echo: true
+long = visits_wide.melt(id_vars="month", var_name="product_line", value_name="visits")
+long.head(8)
+```
+:::
